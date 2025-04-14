@@ -1,0 +1,74 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.register-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: v.$gris_claro;
+    
+    .register-card {
+        width: 50rem;
+        max-width: 95%;
+        padding: 3rem;
+        background-color: v.$blanco;
+        border: 1px solid v.$gris_borde;
+        box-shadow: 0 10px 15px v.$gris_borde;
+        border-radius: 1rem;
+
+        .register-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+
+            .logo-card {
+                width: 20rem;
+            }
+
+            .card-description {
+                color: v.$gris_oscuro;
+                margin: 0;
+            }
+        }
+
+        .register-footer {
+            .login-link {
+                text-align: center;
+    
+                a {
+                    color: v.$teal-600;
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+
+    @include m.telefono {
+        .register-card {
+            padding: 1.5rem; // Reducir padding aún más para pantallas muy pequeñas
+        
+            .register-header {
+                .logo-card {
+                    width: 10rem; // Reducir aún más el tamaño del logo
+                }
+    
+                .card-description {
+                    font-size: 1rem;
+                    margin: 0.5rem 0;
+                }
+            }
+
+            .register-footer {
+                .login-link {
+                    font-size: 1rem;
+                    a {
+                        font-size: 1rem;
+                    }
+                }
+            }
+        }
+    }
+}

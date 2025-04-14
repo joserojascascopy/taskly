@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+// Colores
+$blanco: #ffffff;// Fondos de tarjetas y elementos principales
+$gris_claro: #f9fafb; // (Gray-50) - Fondo de página
+$gris_borde: #e5e7eb; // (Gray-200) - Bordes y separadores
+$gris_medio: #9ca3af; // (Gray-400) - Textos secundarios
+$gris_oscuro: #6b7280; // (Gray-500) - Textos de menor importancia
+$gris_muy_oscuro: #111827; // (Gray-900) - Textos principales
+$teal_600: #0d9488; // Usado para botones, enlaces y elementos destacados
+$teal_500: #14b8a6; // Usado para hover y elementos secundarios
+$teal_300: #5eead4; // Usado para acentos ligeros
+
+// Tamaño de Media Queries
+$telefono: 480px;
+$tablet: 768px;
+$desktop: 1024px;
+
+// Fuente
+
+$fuente_principal: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;

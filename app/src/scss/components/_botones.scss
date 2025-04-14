@@ -1,0 +1,37 @@
+@use 'base/variables' as v;
+
+.btn-login {
+    background-color: v.$teal_600;
+    color: v.$blanco;
+    font-weight: 500;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.4s;
+
+    &:hover {
+        background-color: v.$teal_500;
+    }
+
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(13, 148, 136, 0.4);
+    }
+}
+
+.btn-register {
+    background-color: v.$teal_600;
+    color: v.$blanco;
+    font-weight: 500;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.4s;
+
+    &:hover {
+        background-color: v.$teal_500;
+    }
+
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(13, 148, 136, 0.4);
+    }
+}

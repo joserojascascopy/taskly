@@ -6,6 +6,9 @@
             <img class="logo-card" src="/assets/img/taskly-logo.png" alt="Logo Taskly">
             <h1 class="card-title">Registrarse</h1>
             <p class="card-description">Ingresa tus datos para crear tu cuenta</p>
+            <?php
+            require_once __DIR__ . '/../components/alertas.php';
+            ?>
         </div>
 
         <form action="/registrarse" method="POST" class="register-form">

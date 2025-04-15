@@ -23,6 +23,13 @@ abstract class Model {
         return $stmt->fetch();
     }
 
+    // Método genérico para obtener un registro por EMAIL
+    public static function getByEmail($table, $email) {
+        $stmt = static::$db->prepare("SELECT * FROM $table WHERE email = :email");
+        $stmt->execute(['email' => $email]);
+        return $stmt->fetch();
+    }
+
     // Método para crear un nuevo registro
     public static function create($table, $data) {
         $columns = implode(', ', array_keys($data));

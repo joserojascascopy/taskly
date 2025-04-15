@@ -3,7 +3,28 @@
 namespace Models;
 
 class User extends Model {
+    // Nombre de la tabla para la consulta a la DB
     private $table = 'users';
+
+    public $id;
+    public $nombre;
+    public $apellido;
+    public $email;
+    public $password;
+    public $token;
+
+    // Array de alertas, se inicializa vacio para posteriormente hacer la validación
+
+    public static $alertas = [];
+
+    public function __construct($args = []) {
+        $this->id = $args['id'] ?? null;
+        $this->nombre = $args['nombre'] ?? '';
+        $this->apellido = $args['apellido'] ?? '';
+        $this->email = $args['email'] ?? '';
+        $this->password = $args['password'] ?? '';
+        $this->token = $args['token'] ?? '';
+    }
 
     // Método para obtener todos los usuarios (hereda de Model)
     public function getAllUsers() {
@@ -15,13 +36,19 @@ class User extends Model {
         return self::getById($this->table, $id);
     }
 
+    // Método para obtener un usuario por Email (hereda de Model)
+    public function getUserByEmail($email) {
+        return self::getByEmail($this->table, $email);
+    }
+
     // Método para crear un usuario (hereda de Model)
-    public function createUser($nombre, $apellido, $email, $password) {
+    public function createUser($user) {
         return self::create($this->table, [
-            'nombre' => $nombre,
-            'apellido' => $apellido,
-            'email' => $email,
-            'password' => password_hash($password, PASSWORD_DEFAULT)
+            'nombre' => $user->nombre,
+            'apellido' => $user->apellido,
+            'email' => $user->email,
+            'password' => password_hash($user->password, PASSWORD_DEFAULT),
+            'token' => $user->token
         ]);
     }
 
@@ -37,5 +64,23 @@ class User extends Model {
     // Método para eliminar un usuario
     public function deleteUser($id) {
         return self::delete($this->table, $id);
+    }
+
+    public static function getAlertas() {
+        return self::$alertas;
+    }
+
+    public function validateUser() {
+        $alerta = '*Debes completar todos los campos';
+
+        if(!$this->nombre || !$this->apellido || !$this->email || !$this->password ) {
+            self::$alertas['error'] = $alerta;
+        }
+
+        return self::$alertas;
+    }
+
+    public function generateToken() {
+        $this->token = uniqid();
     }
 }

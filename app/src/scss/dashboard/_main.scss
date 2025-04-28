@@ -14,7 +14,6 @@
 
         .menu-toggle {
             display: none;
-            font-size: 2rem;
             background: none;
             border: none;
             cursor: pointer;
@@ -30,7 +29,7 @@
             background: v.$negro;
             color: v.$blanco;
             border: none;
-            padding: 1rem;
+            padding: 0.75rem 1rem;
             font-weight: 500;
             font-size: 1.5rem;
             border-radius: 1rem;
@@ -207,6 +206,43 @@
 
             .menu-toggle {
                 display: block;
+            }
+
+            .logout-btn {
+                background: v.$negro;
+                color: v.$blanco;
+                border: none;
+                padding: 0.5rem 1rem;
+                font-weight: 500;
+                font-size: 1.25rem;
+                border-radius: 1rem;
+                cursor: pointer;
+    
+                &:hover {
+                    background: v.$grisOscuro;
+                }
+            }
+        }
+    }
+}
+
+// Mover a la derecha el contenido del main al apretar el boton para mostrar el sidebar
+
+@include m.tablet {
+    .dashboard {
+        .hb {
+            width: 2.5rem;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .main {
+            transition: transform 0.3s ease; // Animacion para el main
+            transform: translateX(0);
+            
+            &.traslate {
+                transform: translateX(220px);
+                overflow: hidden;
             }
         }
     }

@@ -72,9 +72,13 @@
                 }
             }
 
+            .btn-login {
+                margin-top: 2rem;
+            }
+
             @include m.telefono {
                 label {
-                    font-size: 1.2rem; // Reducir aún más el tamaño de las etiquetas
+                    font-size: 1.5rem; // Reducir aún más el tamaño de las etiquetas
                 }
 
                 .form-group {
@@ -86,8 +90,21 @@
                 }
 
                 input {
-                    font-size: 1.2rem; // Reducir aún más el tamaño de los inputs
-                    padding: 0.7rem; // Reducir padding para pantallas pequeñas
+                    width: 100%;
+                    padding: 1rem;
+                    border: 1px solid v.$grisClaro;
+                    border-radius: 1rem;
+                    font-size: 1.5rem;
+                    transition: border-color 0.2s, box-shadow 0.2s;
+
+                    &:focus {
+                        outline: none;
+                        border-color: v.$grisOscuro;
+                    }
+
+                    &::placeholder {
+                        color: v.$grisMedio;
+                    }
                 }
             }
         }
@@ -95,6 +112,7 @@
         .forgot-footer {
             .forgot-link {
                 text-align: center;
+                font-size: 1.5rem;
 
                 a {
                     color: v.$grisOscuro;
@@ -118,17 +136,18 @@
                 }
 
                 .card-description {
-                    font-size: 1rem;
+                    font-size: 1.5;
                     margin: 0.5rem 0;
                 }
             }
 
             .forgot-footer {
                 .forgot-link {
-                    font-size: 1rem;
+                    font-size: 1.5rem;
 
                     a {
-                        font-size: 1rem;
+                        color: v.$grisOscuro;
+                        font-weight: 700;
                     }
                 }
             }

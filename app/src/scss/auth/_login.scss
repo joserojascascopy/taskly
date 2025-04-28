@@ -82,6 +82,10 @@
                     color: v.$grisMedio;
                 }
             }
+
+            .btn-login {
+                margin-top: 2rem;
+            }
         }
 
         .login-footer {
@@ -106,16 +110,18 @@
                 }
     
                 .card-description {
-                    font-size: 1rem;
+                    font-size: 1.5rem;
                     margin: 0.5rem 0;
                 }
             }
 
             .login-footer {
                 .register-link {
-                    font-size: 1rem;
+                    font-size: 1.5rem;
+
                     a {
-                        font-size: 1rem;
+                        color: v.$grisOscuro;
+                        font-weight: 700;
                     }
                 }
             }

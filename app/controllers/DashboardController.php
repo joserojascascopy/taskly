@@ -7,12 +7,6 @@ use MVC\Router;
 
 class DashboardController {
     public static function index(Router $router) {
-        session_start();
-        $isLogin = $_SESSION['login'];
-
-        if(!$isLogin) {
-            header('Location: /');
-        }
         
         $router->render('dashboard/index', [
         ]);

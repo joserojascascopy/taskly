@@ -50,4 +50,38 @@ class RegisterController {
             'alertas' => $alertas
         ]);
     }
+
+    public static function confirm(Router $router) {
+        $token = $_GET['token'];
+
+        $error = false;
+
+        $user = New User;
+
+        $alertas = User::getAlertas();
+
+        $user = $user->getUserByToken($token);
+
+        if(empty($user)) {
+            $error = true;
+            $alertas['error'] = 'Token No válido';
+        }else {
+            // Eliminamos el token
+            $user->token = '';
+            $user->updateToken($user->id, $user->token);
+            // Actualizamos a confirmado
+            $confirmado = 1;
+            $resultado = $user->updateConfirmado($user->id, $confirmado);
+
+            if($resultado) {
+                $alertas['exito'] = 'Usuario confirmado correctamente';
+            }
+        }
+
+
+        $router->render('auth/confirm', [
+            'error' => $error,
+            'alertas' => $alertas
+        ]);
+    }
 }

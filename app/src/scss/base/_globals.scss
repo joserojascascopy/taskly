@@ -19,7 +19,7 @@ body {
     font-optical-sizing: auto;
     font-style: normal;
     font-size: 1rem;
-    color: v.$gris_muy_oscuro;
+    color: v.$negro;
 
     &.overflow-hidden {
         overflow: hidden;
@@ -28,7 +28,7 @@ body {
 
 p {
     font-size: 1.5rem;
-    line-height: 1;
+    line-height: 1.5;
 }
 
 a {

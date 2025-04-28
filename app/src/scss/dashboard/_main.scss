@@ -1,0 +1,213 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.main {
+    margin-left: 220px;
+    flex: 1;
+    padding: 2rem;
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+
+        .menu-toggle {
+            display: none;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        p {
+            span {
+                font-weight: bold;
+            }
+        }
+
+        .logout-btn {
+            background: v.$negro;
+            color: v.$blanco;
+            border: none;
+            padding: 1rem;
+            font-weight: 500;
+            font-size: 1.5rem;
+            border-radius: 1rem;
+            cursor: pointer;
+
+            &:hover {
+                background: v.$grisOscuro;
+            }
+        }
+    }
+
+    .projects {
+        h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .filter-tasks {
+            margin: 1.5rem auto 2rem;
+            text-align: center;
+            font-size: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+
+            span {
+                font-weight: 500;
+                color: v.$negro;
+                align-self: center;
+            }
+
+            label {
+                font-weight: 500;
+                color: v.$negro;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0.25rem 0.75rem;
+                border-radius: 0.5rem;
+                transition: background-color 0.2s ease;
+
+                input[type="radio"] {
+                    accent-color: v.$negro;
+                    cursor: pointer;
+                }
+
+                &:hover {
+                    background-color: v.$grisMuyClaro;
+                }
+            }
+        }
+
+
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+
+            .project-card {
+                background: v.$blanco;
+                padding: 1.5rem;
+                border: 1px solid v.$grisMuyClaro;
+                border-radius: 1rem;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+                position: relative;
+                overflow: hidden;
+
+                &:hover {
+                    .overlay {
+                        opacity: 1;
+                        pointer-events: auto;
+
+                        .acciones {
+                            button {
+                                opacity: 1;
+                            }
+                        }
+                    }
+                }
+
+                .card-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 1.25rem;
+
+                    h2 {
+                        font-size: 1.5rem;
+                        margin-bottom: 0;
+                    }
+
+                    .estado {
+                        padding: 0.25rem 0.5rem;
+                        font-size: 1rem;
+                        border-radius: 0.375rem;
+                        background-color: v.$amarillo; // Pendiente
+                        color: v.$blanco;
+                        font-weight: bold;
+                    }
+                }
+
+                &.completado .estado {
+                    background-color: v.$verde; // Completado
+                    color: v.$blanco;
+                }
+
+                p {
+                    color: v.$grisOscuro;
+                }
+
+                .overlay {
+                    position: absolute;
+                    inset: 0;
+                    background-color: rgba(0, 0, 0, 0.8); // Fondo semitransparente
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    opacity: 0;
+                    pointer-events: none;
+                    transition: opacity 0.3s ease;
+
+                    .acciones {
+                        display: flex;
+                        gap: 0.75rem;
+                        transition: transform 0.3s ease;
+
+                        button {
+                            width: 12rem;
+                            padding: 0.75rem 1rem;
+                            border: none;
+                            border-radius: 0.5rem;
+                            font-weight: 500;
+                            cursor: pointer;
+                            transition: background 0.2s ease, opacity 0.3s ease;
+                            min-width: 10rem;
+                            opacity: 0;
+
+                            &.btn-completar {
+                                background-color: v.$verde;
+                                color: v.$blanco;
+
+                                &:hover {
+                                    background-color: #16a34a;
+                                }
+                            }
+
+                            &.btn-eliminar {
+                                background-color: v.$rojo;
+                                color: v.$blanco;
+
+                                &:hover {
+                                    background-color: #dc2626;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Responsivo
+@include m.tablet {
+    .main {
+        margin-left: 0;
+
+        header {
+            p {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+        }
+    }
+}

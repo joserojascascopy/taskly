@@ -6,15 +6,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: v.$gris_claro;
+    background-color: v.$blanco;
 
     .login-card {
         width: 50rem;
         max-width: 95%;
         padding: 3rem;
-        background-color: v.$blanco;
-        border: 1px solid v.$gris_borde;
-        box-shadow: 0 10px 15px v.$gris_borde;
+        background-color: v.$grisMuyClaro;
+        border: 1px solid v.$grisMuyClaro;
+        box-shadow: 0 0 20px v.$grisMedio;
         border-radius: 1rem;
 
         .login-header {
@@ -22,16 +22,65 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
 
             .logo-card {
                 width: 20rem;
             }
 
             .card-description {
-                color: v.$gris_oscuro;
+                color: v.$grisMedio;
                 margin: 1.5rem 0;
                 line-height: 1.5rem;
+            }
+        }
+
+        .login-form {
+            margin-bottom: 2rem;
+            
+            label {
+                font-size: 1.5rem;
+                display: block;
+                font-weight: 500;
+                color: v.$negro;
+            }
+        
+            .form-group {
+                margin-bottom: 1rem;
+            }
+        
+            .email-header,
+            .password-header {
+                margin-bottom: 1.5rem;
+            }
+        
+            .password-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+        
+                a {
+                    color: v.$grisMedio;
+                    font-size: 1.5rem;
+                }
+            }
+        
+            input {
+                width: 100%;
+                padding: 1rem;
+                border: 1px solid v.$grisClaro;
+                border-radius: 1rem;
+                font-size: 1.5rem;
+                transition: border-color 0.2s, box-shadow 0.2s;
+        
+                &:focus {
+                    outline: none;
+                    border-color: v.$grisOscuro;
+                }
+        
+                &::placeholder {
+                    color: v.$grisMedio;
+                }
             }
         }
 
@@ -40,8 +89,8 @@
                 text-align: center;
 
                 a {
-                    color: v.$teal-600;
-                    font-weight: 500;
+                    color: v.$grisOscuro;
+                    font-weight: 700;
                 }
             }
         }

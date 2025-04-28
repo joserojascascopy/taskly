@@ -3,7 +3,6 @@
 use Dotenv\Dotenv;
 
 function connect(): PDO {
-
     if (!isset($_ENV['DB_HOST'])) {
         $dotenv = Dotenv::createImmutable(dirname(__DIR__));
         $dotenv->load();

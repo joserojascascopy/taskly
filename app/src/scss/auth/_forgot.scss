@@ -1,23 +1,23 @@
 @use 'base/variables' as v;
 @use 'base/mixins' as m;
 
-.register-container {
+.forgot-container {
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: v.$blanco;
 
-    .register-card {
+    .forgot-card {
         width: 50rem;
         max-width: 95%;
         padding: 3rem;
         background-color: v.$grisMuyClaro;
         border: 1px solid v.$grisMuyClaro;
-        box-shadow: 0 0px 20px v.$grisMedio;
+        box-shadow: 0 0 20px v.$grisMedio;
         border-radius: 1rem;
 
-        .register-header {
+        .forgot-header {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -30,11 +30,13 @@
 
             .card-description {
                 color: v.$grisMedio;
-                margin: 0;
+                margin: 1.5rem 0;
+                line-height: 1.5rem;
+                text-align: center;
             }
         }
 
-        .register-form {
+        .forgot-form {
             margin-bottom: 2rem;
 
             label {
@@ -48,17 +50,8 @@
                 margin-bottom: 1rem;
             }
 
-            .name-header,
-            .apellido-header,
-            .email-header,
-            .password-header {
+            .email-header {
                 margin-bottom: 1.5rem;
-            }
-
-            .password-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
             }
 
             input {
@@ -88,20 +81,8 @@
                     margin-bottom: 0.5rem; // Ajustar márgenes aún más
                 }
 
-                .name-header,
-                .apellido-header .email-header,
-                .password-header {
+                .email-header {
                     margin-bottom: 0.8rem; // Reducir el espacio entre los campos
-                }
-
-                .password-header {
-                    flex-direction: column; // Asegurar que todo esté en columna
-                    align-items: flex-start;
-
-                    a {
-                        font-size: 1.2rem; // Reducir aún más el tamaño del enlace
-                        margin-top: 0.5rem; // Espacio entre el enlace y el texto
-                    }
                 }
 
                 input {
@@ -111,8 +92,8 @@
             }
         }
 
-        .register-footer {
-            .login-link {
+        .forgot-footer {
+            .forgot-link {
                 text-align: center;
 
                 a {
@@ -124,10 +105,14 @@
     }
 
     @include m.telefono {
-        .register-card {
+        .forgot-card {
             padding: 1.5rem; // Reducir padding aún más para pantallas muy pequeñas
 
-            .register-header {
+            .forgot-header {
+                h1 {
+                    font-size: 2rem;
+                }
+
                 .logo-card {
                     width: 10rem; // Reducir aún más el tamaño del logo
                 }
@@ -138,8 +123,8 @@
                 }
             }
 
-            .register-footer {
-                .login-link {
+            .forgot-footer {
+                .forgot-link {
                     font-size: 1rem;
 
                     a {

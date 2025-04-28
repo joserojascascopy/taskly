@@ -1,0 +1,49 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background: v.$grisMuyClaro;
+    width: 220px;
+    padding: 1rem;
+    border-right: 1px solid v.$grisClaro;
+    position: fixed;
+    height: 100%;
+
+    .nav-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .logo {
+            width: 15rem;
+        }
+
+        .nav-links a {
+            display: block;
+            margin-bottom: 1rem;
+            text-decoration: none;
+            color: v.$negro;
+            font-size: 2rem;
+            font-weight: 500;
+
+            &:hover {
+                color: v.$grisMedio;
+            }
+        }
+    }
+}
+
+@include m.tablet {
+    .dashboard {
+        .sidebar {
+            transform: translateX(-100%);
+            position: absolute;
+            z-index: 10;
+        }
+    }
+}

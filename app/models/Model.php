@@ -27,6 +27,15 @@ abstract class Model {
     public static function getByEmail($table, $email) {
         $stmt = static::$db->prepare("SELECT * FROM $table WHERE email = :email");
         $stmt->execute(['email' => $email]);
+        $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, static::class);
+        return $stmt->fetch();
+    }
+
+    // Método genérico para obtener un registro por TOKEN
+    public static function getByToken($table, $token) {
+        $stmt = static::$db->prepare("SELECT * FROM $table WHERE token = :token");
+        $stmt->execute(['token' => $token]);
+        $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, static::class);
         return $stmt->fetch();
     }
 

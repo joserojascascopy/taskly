@@ -1,0 +1,74 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.confirm-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: v.$blanco;
+
+    .confirm-card {
+        width: 50rem;
+        max-width: 95%;
+        padding: 3rem;
+        background-color: v.$grisMuyClaro;
+        border: 1px solid v.$grisMuyClaro;
+        box-shadow: 0 0 20px v.$grisMedio;
+        border-radius: 1rem;
+
+        .confirm-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+
+            h1 {
+                font-size: 3rem;
+                text-align: center;
+            }
+
+            .logo-card {
+                width: 20rem;
+            }
+
+            .card-description {
+                color: v.$grisMedio;
+                margin: 1.5rem 0;
+                line-height: 1.5rem;
+                text-align: center;
+            }
+        }
+    }
+
+    @include m.telefono {
+        .confirm-card {
+            padding: 1.5rem; // Reducir padding aún más para pantallas muy pequeñas
+        
+            .confirm-header {
+                h1 {
+                    font-size: 2rem;
+                }
+
+                .logo-card {
+                    width: 10rem; // Reducir aún más el tamaño del logo
+                }
+    
+                .card-description {
+                    font-size: 1rem;
+                    margin: 0.5rem 0;
+                }
+            }
+
+            .confirm-footer {
+                .confirm-link {
+                    font-size: 1rem;
+                    a {
+                        font-size: 1rem;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,37 +1,59 @@
 @use 'base/variables' as v;
 
 .btn-login {
-    background-color: v.$teal_600;
+    background-color: v.$negro;
     color: v.$blanco;
     font-weight: 500;
     text-transform: uppercase;
     cursor: pointer;
-    transition: background-color 0.4s;
+    transition: background-color 0.4s ease;
 
     &:hover {
-        background-color: v.$teal_500;
-    }
-
-    &:focus {
-        outline: none;
-        box-shadow: 0 0 0 2px rgba(13, 148, 136, 0.4);
+        background-color: v.$grisOscuro;
     }
 }
 
 .btn-register {
-    background-color: v.$teal_600;
+    background-color: v.$negro;
     color: v.$blanco;
     font-weight: 500;
     text-transform: uppercase;
     cursor: pointer;
-    transition: background-color 0.4s;
+    transition: background-color 0.4s ease;
 
     &:hover {
-        background-color: v.$teal_500;
+        background-color: v.$grisOscuro;
     }
+}
 
-    &:focus {
-        outline: none;
-        box-shadow: 0 0 0 2px rgba(13, 148, 136, 0.4);
+.btn-confirm {
+    display: inline-block;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: v.$negro;
+    color: v.$blanco;
+    font-weight: 500;
+    font-size: 1.5rem;
+    text-align: center;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.4s ease;
+
+    &:hover {
+        background-color: v.$grisOscuro;
+    }
+}
+
+.btn-crear {
+    background-color: v.$negro;
+    color: v.$blanco;
+    font-weight: 500;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.4s ease;
+
+    &:hover {
+        background-color: v.$grisOscuro;
     }
 }

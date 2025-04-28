@@ -53,7 +53,7 @@ class Email {
             $contenido = "<html>";
             $contenido .= "<p><strong>Hola, " . $this->nombre . " " . $this->apellido . "</strong>. Has creado tu cuenta en Taskly
             , solo debes confirmarla presionando el siguiente enlace</p>";
-            $contenido .= "<p>Presiona aquí: <a href='http://localhost:3000/confirmar-cuenta?token=" . $this->token . "'>Confirmar cuenta</a></p>";
+            $contenido .= "<p>Presiona aquí: <a href='http://localhost:3000/confirm-account?token=" . $this->token . "'>Confirmar cuenta</a></p>";
             $contenido .= "</html>"; 
 
             $mail->Body = $contenido;
@@ -62,5 +62,36 @@ class Email {
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
+    }
+
+    public function enviarRestablecer() {
+        // Crear la instancia de PHPMailer
+        $mail = new PHPMailer();
+
+        // Server settings
+        $mail->isSMTP();   
+        $mail->Host = MAIL_HOST;
+        $mail->SMTPAuth = true;
+        $mail->Port = MAIL_PORT;
+        $mail->Username = MAIL_USERNAME;
+        $mail->Password = MAIL_PASSWORD;
+
+        $mail->setFrom('admin@taskly.com', 'Taskly');
+        $mail->addAddress($this->email, $this->nombre . " " . $this->apellido);
+
+        //Content
+        $mail->isHTML(true);
+        $mail->CharSet = 'UTF-8';
+        $mail->Subject = 'Reestablecer contraseña';
+
+        $contenido = "<html>";
+        $contenido .= "<p><strong>Hola, " . $this->nombre . " " . $this->apellido . "</strong>. Para reestablecer su contraseña haga click en el siguiente enlace.</p>";
+        $contenido .= "<p>Presiona aquí: <a href='http://localhost:3000/reset-password?token=" . $this->token . "'>Reestablecer Contraseña</a></p>";
+        $contenido .= "</html>";
+
+        $mail->Body = $contenido;
+
+        // Enviar el email
+        return $mail->send();
     }
 }

@@ -12,6 +12,7 @@ class User extends Model {
     public $email;
     public $password;
     public $token;
+    public $confirmado;
 
     // Array de alertas, se inicializa vacio para posteriormente hacer la validación
 
@@ -24,6 +25,7 @@ class User extends Model {
         $this->email = $args['email'] ?? '';
         $this->password = $args['password'] ?? '';
         $this->token = $args['token'] ?? '';
+        $this->confirmado = $args['confirmado'] ?? 0;
     }
 
     // Método para obtener todos los usuarios (hereda de Model)
@@ -41,6 +43,11 @@ class User extends Model {
         return self::getByEmail($this->table, $email);
     }
 
+     // Método para obtener un usuario por Token (hereda de Model)
+    public function getUserByToken($token) {
+        return self::getByToken($this->table, $token);
+    }
+
     // Método para crear un usuario (hereda de Model)
     public function createUser($user) {
         return self::create($this->table, [
@@ -48,6 +55,7 @@ class User extends Model {
             'apellido' => $user->apellido,
             'email' => $user->email,
             'password' => password_hash($user->password, PASSWORD_DEFAULT),
+            'confirmado' => $user->confirmado,
             'token' => $user->token
         ]);
     }
@@ -61,6 +69,27 @@ class User extends Model {
         ]);
     }
 
+    // Método para actualizar el token de un usuario
+    public function updateToken($id, $token) {
+        return self::update($this->table, $id, [
+            'token' => $token
+        ]);
+    }
+
+    // Método para actualizar el password de un usuario
+    public function updatePassword($id, $password) {
+        return self::update($this->table, $id, [
+            'password' => $password
+        ]);
+    }
+
+    // Método para actualizar a confirmado un usuario
+    public function updateConfirmado($id, $confirmado) {
+        return self::update($this->table, $id, [
+            'confirmado' => $confirmado
+        ]);
+    }
+
     // Método para eliminar un usuario
     public function deleteUser($id) {
         return self::delete($this->table, $id);
@@ -71,10 +100,28 @@ class User extends Model {
     }
 
     public function validateUser() {
-        $alerta = '*Debes completar todos los campos';
+        $alerta = 'Debes completar todos los campos';
 
         if(!$this->nombre || !$this->apellido || !$this->email || !$this->password ) {
             self::$alertas['error'] = $alerta;
+        }
+
+        return self::$alertas;
+    }
+    
+    public function validarReset() {
+        if(!$this->email) {
+            self::$alertas['error'] = 'Debes introducir un correo';
+        }
+
+        return self::$alertas;
+    }
+
+    public function validateLogin() {
+        $mensaje = 'Debes completar todos los campos';
+
+        if(!$this->email && !$this->password) {
+            self::$alertas['error'] = $mensaje;
         }
 
         return self::$alertas;

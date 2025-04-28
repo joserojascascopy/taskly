@@ -32,7 +32,7 @@ class Tareas extends Model {
         return self::create($this->table, [
             'titulo' => $tarea->titulo,
             'descripcion' => $tarea->descripcion,
-            'estado' => $tarea->estado,
+            'estado' => $tarea->estado ?? 'pendiente',
             'user_id' => $tarea->user_id
         ]);
     }

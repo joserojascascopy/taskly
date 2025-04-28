@@ -17,17 +17,21 @@ class DashboardController {
 
         $user_id = $_SESSION['id'];
     
-        $tareas = new Tareas;
+        $task = new Tareas;
 
         $alertas = Tareas::getAlertas();
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $tareas = new Tareas($_POST);
+            $task = new Tareas($_POST);
 
-            $alertas = $tareas->validateTask();
+            $alertas = $task->validateTask();
 
             if(empty($alertas)) {
-                $tareas = new Tareas($_POST);
+                $resultado = $task->createTask($task);
+
+                if($resultado) {
+                    $alertas['exito'] = 'Tarea creada correctamente';
+                }
             }
         }
 

@@ -12,6 +12,7 @@
 
     <div class="main show">
         <header>
+            <!-- <button class="menu-toggle" id="menuToggle">&#9776;</button> -->
             <button class="menu-toggle" id="menuToggle">
                 <svg class="hb" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" stroke="#000000" stroke-width=".6" fill="rgba(0,0,0,0)" stroke-linecap="round" style="cursor: pointer">
                     <path d="M2,3L5,3L8,3M2,5L8,5M2,7L5,7L8,7">

@@ -7,8 +7,10 @@ use Firebase\JWT\Key;
 use Models\Tareas;
 use Models\User;
 
-class ApiController {
-    public static function auth() {
+class ApiController
+{
+    public static function auth()
+    {
         header('Content-Type: application/json');
 
         $input = json_decode(file_get_contents('php://input'), true);
@@ -31,14 +33,6 @@ class ApiController {
 
             try {
                 $decoded = JWT::decode($idToken, new Key($publicKey, 'RS256'));
-                // Guardar en sesión si querés
-                session_start();
-                $_SESSION = [
-                    'uid' => $decoded->sub,
-                    'email' => $decoded->email,
-                    'name' => $decoded->name ?? '',
-                    'login' => true
-                ];
 
                 $email = $decoded->email;
                 $nombreCompleto = $decoded->name ?? '';
@@ -51,9 +45,18 @@ class ApiController {
 
                 $resultado = $user->getUserByEmail($email);
 
-                if(!$resultado) {
+                if (!$resultado) {
                     $user->createUser($user);
                 }
+
+                // Guardar en sesión
+                session_start();
+                $_SESSION = [
+                    'id' => $resultado->id,
+                    'email' => $decoded->email,
+                    'nombre' => $decoded->name ?? '',
+                    'login' => true
+                ];
 
                 echo json_encode(['success' => true]);
                 return;
@@ -68,7 +71,8 @@ class ApiController {
         echo json_encode(['success' => false, 'message' => 'Clave pública no encontrada']);
     }
 
-    public static function tasks() {
+    public static function tasks()
+    {
         header('Content-Type: application/json');
 
         $body = json_decode(file_get_contents('php://input'), true);
@@ -79,14 +83,15 @@ class ApiController {
 
         $tasks = $tasks->getTaskByUserId($user_id);
 
-        if(!empty($tasks)) {
+        if (!empty($tasks)) {
             echo json_encode(['success' => true, 'tasks' => $tasks]);
-        }else {
+        } else {
             echo json_encode(['success' => false]);
         }
     }
 
-    public static function update() {
+    public static function update()
+    {
         header('Content-Type: application/json');
 
         $body = json_decode(file_get_contents('php://input'), true);

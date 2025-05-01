@@ -52,7 +52,12 @@ abstract class Model {
         $columns = implode(', ', array_keys($data));
         $placeholders = implode(', ', array_map(fn($key) => ":$key", array_keys($data)));
         $stmt = static::$db->prepare("INSERT INTO $table ($columns) VALUES ($placeholders)");
-        return $stmt->execute($data);
+        $success = $stmt->execute($data);
+
+        return [
+            'success' => $success,
+            'id' => $success ? static::$db->lastInsertId() : null
+        ];
     }
 
     // Método para actualizar un registro por ID

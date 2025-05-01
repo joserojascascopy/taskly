@@ -4,6 +4,7 @@ namespace Controllers;
 
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use Models\Tareas;
 use Models\User;
 
 class ApiController {
@@ -65,5 +66,37 @@ class ApiController {
 
         http_response_code(401);
         echo json_encode(['success' => false, 'message' => 'Clave pública no encontrada']);
+    }
+
+    public static function tasks() {
+        header('Content-Type: application/json');
+
+        $body = json_decode(file_get_contents('php://input'), true);
+
+        $user_id = $body['user_id'] ?? null;
+
+        $tasks = new Tareas;
+
+        $tasks = $tasks->getTaskByUserId($user_id);
+
+        if(!empty($tasks)) {
+            echo json_encode(['success' => true, 'tasks' => $tasks]);
+        }else {
+            echo json_encode(['success' => false]);
+        }
+    }
+
+    public static function update() {
+        header('Content-Type: application/json');
+
+        $body = json_decode(file_get_contents('php://input'), true);
+
+        $id = $body['id'] ?? null;
+
+        $task = new Tareas;
+
+        $task->actualizarEstado($id);
+
+        echo json_encode(['success' => true]);
     }
 }

@@ -31,6 +31,14 @@ abstract class Model {
         return $stmt->fetch();
     }
 
+    // Método genérico para obtener un registro por su estado
+    public static function getByUserId($table, $user_id) {
+        $stmt = static::$db->prepare("SELECT * FROM $table WHERE user_id = :user_id");
+        $stmt->execute(['user_id' => $user_id]);
+        $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, static::class);
+        return $stmt->fetchAll();
+    }
+
     // Método genérico para obtener un registro por TOKEN
     public static function getByToken($table, $token) {
         $stmt = static::$db->prepare("SELECT * FROM $table WHERE token = :token");
@@ -59,5 +67,13 @@ abstract class Model {
     public static function delete($table, $id) {
         $stmt = static::$db->prepare("DELETE FROM $table WHERE id = :id");
         return $stmt->execute(['id' => $id]);
+    }
+
+    public function actualizarEstado($id) {
+        $sql = "UPDATE tareas SET estado = 'completado' WHERE id = :task_id";
+        $stmt = static::$db->prepare($sql);
+        return $stmt->execute([
+            ':task_id' => $id
+        ]);
     }
 }

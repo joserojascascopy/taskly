@@ -2,6 +2,8 @@
 
 namespace Models;
 
+use PDO;
+
 class Tareas extends Model {
     protected $table = 'tareas';
 
@@ -22,9 +24,15 @@ class Tareas extends Model {
         $this->user_id = $args['user_id'] ?? '';
     }
 
-    // Método para obtener todos los usuarios (hereda de Model)
+    // Método para obtener todas las tareas (hereda de Model)
     public function getAllTasks() {
         return self::getAll($this->table);
+    }
+
+    // Metodo para obtener todas las tareas de un usuario
+
+    public function getTaskByUserId($user_id) {
+        return self::getByUserId($this->table, $user_id);
     }
 
     // Método para crear una tarea (hereda de Model)

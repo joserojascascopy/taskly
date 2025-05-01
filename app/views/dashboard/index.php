@@ -28,7 +28,7 @@
                     </rect>
                 </svg>
             </button>
-            <p>Hola: <span>José Rojas</span></p>
+            <p>Hola: <span data-id="<?php echo $user_id; ?>"><?php echo $nombre; ?></span></p>
             <a class="logout-btn" href="/logout">Cerrar sesión</a>
         </header>
 
@@ -53,51 +53,11 @@
                 </label>
             </div>
 
-            <div class="projects-container">
-                <div class="project-card pendiente">
-                    <div class="card-header">
-                        <h2>Tarea A</h2>
-                        <span class="estado">Pendiente</span>
-                    </div>
-                    <p>Gestión de tareas con PHP y JS</p>
-                    <div class="overlay">
-                        <div class="acciones">
-                            <button class="btn-completar">Completado</button>
-                            <button class="btn-eliminar">Eliminar</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card completado">
-                    <div class="card-header">
-                        <h2>Tarea B</h2>
-                        <span class="estado">Completado</span>
-                    </div>
-                    <p>E-commerce con Tailwind y MySQL</p>
-                    <div class="overlay">
-                        <div class="acciones">
-                            <button class="btn-completar">Completado</button>
-                            <button class="btn-eliminar">Eliminar</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card pendiente">
-                    <div class="card-header">
-                        <h2>Tarea C</h2>
-                        <span class="estado">Pendiente</span>
-                    </div>
-                    <p>App de recordatorios con WhatsApp API</p>
-                    <div class="overlay">
-                        <div class="acciones">
-                            <button class="btn-completar">Completado</button>
-                            <button class="btn-eliminar">Eliminar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="projects-container"></div>
         </section>
     </div>
 </div>
 
 <script src="/assets/js/menuToggle.js"></script>
+<script src="/assets/js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

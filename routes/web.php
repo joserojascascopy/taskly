@@ -40,7 +40,8 @@ $router->get('/dashboard', [DashboardController::class, 'index']);
 $router->get('/crear-tarea', [DashboardController::class, 'create']);
 $router->post('/crear-tarea', [DashboardController::class, 'create']);
 
-// Api
+// API
 
 $router->post('/api/auth', [ApiController::class, 'auth']);
-$router->get('/api/auth', [ApiController::class, 'auth']);
+$router->post('/api/tasks', [ApiController::class, 'tasks']);
+$router->post('/api/task-update', [ApiController::class, 'update']);

@@ -7,8 +7,14 @@ use MVC\Router;
 
 class DashboardController {
     public static function index(Router $router) {
-        
+        session_start();
+
+        $user_id = $_SESSION['id'];
+        $nombre = $_SESSION['nombre'];
+
         $router->render('dashboard/index', [
+            'user_id' => $user_id,
+            'nombre' => $nombre
         ]);
     }
 

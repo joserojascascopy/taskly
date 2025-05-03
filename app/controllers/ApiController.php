@@ -46,7 +46,15 @@ class ApiController
                 $resultado = $user->getUserByEmail($email);
 
                 if (!$resultado) {
-                    $user->createUser($user);
+                    $userId = $user->createUser($user);
+                    // Guardar en sesión
+                    session_start();
+                    $_SESSION = [
+                        'id' => $userId['id'],
+                        'email' => $decoded->email,
+                        'nombre' => $decoded->name ?? '',
+                        'login' => true
+                    ];
                 }
 
                 // Guardar en sesión

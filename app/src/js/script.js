@@ -29,6 +29,7 @@ async function AllTasks() {
 // Nos muestra las tareas en el html
 function mostrarTasks(tasks) {
     const projectsContainer = document.querySelector('.projects-container');
+    projectsContainer.innerHTML = '';
 
     tasks.forEach(task => {
         const { id, titulo, descripcion, estado } = task;
@@ -64,7 +65,7 @@ function mostrarTasks(tasks) {
 
             const span = document.createElement('SPAN');
             span.classList.add('tooltiptext');
-            span.textContent = 'Haz doble click para completar';
+            span.textContent = 'Haz doble click para marcar como completado';
 
             divEstado.appendChild(btnEstado);
             divEstado.appendChild(span);
@@ -81,10 +82,10 @@ function mostrarTasks(tasks) {
         divAcciones.appendChild(divEstado);
         divAcciones.appendChild(btnEliminar);
 
-        const P = document.createElement('P');
-        P.textContent = descripcion;
+        const descripcionParrafo = document.createElement('P');
+        descripcionParrafo.textContent = descripcion;
 
-        projectCard.appendChild(P);
+        projectCard.appendChild(descripcionParrafo);
 
         projectsContainer.appendChild(projectCard);
     });
@@ -160,14 +161,15 @@ function deleteTask() {
                 confirmButtonText: "Si, eliminar",
                 cancelButtonText: "Cancelar"
             }).then((result) => {
-                eliminar(id);
                 if (result.isConfirmed) {
-                    Swal.fire({
-                        title: "Deleted!",
-                        text: "La tarea ha sido eliminada",
-                        icon: "success"
-                    }).then(() => {
-                        location.reload();
+                    eliminar(id).then(() => {
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "La tarea ha sido eliminada",
+                            icon: "success"
+                        }).then(() => {
+                            e.target.closest('.project-card').remove(); // Para evitar la recarga de la página, el método .closest(selector) busca en el DOM hacia arriba, es decir, del elemento actual hacia sus padres, abuelos, bisabuelos, etc., hasta encontrar el primer ancestro que coincida con el selector que le indiques
+                        })
                     })
                 };
             })
@@ -176,12 +178,16 @@ function deleteTask() {
 }
 
 async function eliminar(id) {
-    const url = '/api/task-delete';
-    const res = await fetch(url, {
-        method: 'POST',
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id })
-    });
+    try {
+        const url = '/api/task-delete';
+        const res = await fetch(url, {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id })
+        });
 
-    const body = await res.json();
+        const body = await res.json();
+    } catch (error) {
+        console.error('Error eliminando tarea: ', error);
+    }
 }

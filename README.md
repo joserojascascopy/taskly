@@ -12,12 +12,12 @@ jhp/
 │   ├── models/            # Modelos de base de datos
 │   ├── views/             # Vistas del sistema
 │   ├── src/               # Archivos fuente: SCSS, JS
-│   └── routes/            # Rutas de la aplicación
 ├── config/                # Config global (base de datos, etc)
 ├── core/                  # Núcleo del framework (Router, etc)
 ├── public/                # Carpeta pública
 │   ├── assets/            # Archivos compilados (CSS, JS, imágenes)
 │   └── index.php          # Punto de entrada
+├──routes/                 # Rutas de la aplicación
 ├── .env.example           # Variables de entorno de ejemplo
 ├── .gitignore
 ├── composer.json

@@ -45,3 +45,4 @@ $router->post('/crear-tarea', [DashboardController::class, 'create']);
 $router->post('/api/auth', [ApiController::class, 'auth']);
 $router->post('/api/tasks', [ApiController::class, 'tasks']);
 $router->post('/api/task-update', [ApiController::class, 'update']);
+$router->post('/api/task-delete', [ApiController::class, 'delete']);

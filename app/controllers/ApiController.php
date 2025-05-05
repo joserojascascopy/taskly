@@ -79,8 +79,7 @@ class ApiController
         echo json_encode(['success' => false, 'message' => 'Clave pública no encontrada']);
     }
 
-    public static function tasks()
-    {
+    public static function tasks() {
         header('Content-Type: application/json');
 
         $body = json_decode(file_get_contents('php://input'), true);
@@ -98,8 +97,7 @@ class ApiController
         }
     }
 
-    public static function update()
-    {
+    public static function update() {
         header('Content-Type: application/json');
 
         $body = json_decode(file_get_contents('php://input'), true);
@@ -111,5 +109,23 @@ class ApiController
         $task->actualizarEstado($id);
 
         echo json_encode(['success' => true]);
+    }
+
+    public static function delete() {
+        header('Content-Type: application/json');
+
+        $body = json_decode(file_get_contents('php://input'), true);
+
+        $idTask = $body['id'];
+
+        $task = new Tareas;
+
+        $resultado = $task->deleteTask($idTask);
+
+        if($resultado) {
+            echo json_encode(['success' => true]);
+        }else {
+            echo json_encode(['success' => false]);
+        }
     }
 }

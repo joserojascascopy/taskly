@@ -71,7 +71,8 @@ function mostrarTasks(tasks) {
         }
 
         const btnEliminar = document.createElement('BUTTON');
-        btnEliminar.classList.add('eliminar')
+        btnEliminar.classList.add('eliminar');
+        btnEliminar.dataset.idTask = id;
         btnEliminar.textContent = 'ELIMINAR';
 
         projectCard.appendChild(cardHeader);
@@ -89,6 +90,7 @@ function mostrarTasks(tasks) {
     });
 
     actualizarEstado();
+    deleteTask();
 }
 
 function actualizarEstado() {
@@ -139,4 +141,47 @@ function showMessage() {
     mensaje.classList.add('mensaje');
 
     projectsDiv.appendChild(mensaje);
+}
+
+function deleteTask() {
+    const btnEliminar = document.querySelectorAll('.eliminar');
+
+    btnEliminar.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const id = e.target.dataset.idTask;
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Si, eliminar",
+                cancelButtonText: "Cancelar"
+            }).then((result) => {
+                eliminar(id);
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "La tarea ha sido eliminada",
+                        icon: "success"
+                    }).then(() => {
+                        location.reload();
+                    })
+                };
+            })
+        });
+    });
+}
+
+async function eliminar(id) {
+    const url = '/api/task-delete';
+    const res = await fetch(url, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id })
+    });
+
+    const body = await res.json();
 }

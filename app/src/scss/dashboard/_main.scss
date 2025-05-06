@@ -27,6 +27,9 @@
         }
 
         .logout-btn {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
             background: v.$negro;
             color: v.$blanco;
             border: none;
@@ -38,6 +41,10 @@
 
             &:hover {
                 background: v.$grisOscuro;
+            }
+
+            svg {
+                width: 1.5rem;
             }
         }
     }

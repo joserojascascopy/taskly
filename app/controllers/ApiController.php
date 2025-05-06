@@ -128,4 +128,32 @@ class ApiController
             echo json_encode(['success' => false]);
         }
     }
+
+    public static function pending() {
+        header('Content-Type: application/json');
+
+        $body = json_decode(file_get_contents('php://input'), true);
+
+        $userId = $body['userId'];
+
+        $task = new Tareas;
+
+        $resultado = $task->getTaskByStatus($userId, 'pendiente');
+
+        echo json_encode(['success' => true, 'resultado' => $resultado]);
+    }
+
+    public static function completed() {
+        header('Content-Type: application/json');
+
+        $body = json_decode(file_get_contents('php://input'), true);
+
+        $userId = $body['userId'];
+
+        $task = new Tareas;
+
+        $resultado = $task->getTaskByStatus($userId, 'completado');
+
+        echo json_encode(['success' => true, 'resultado' => $resultado]);
+    }
 }

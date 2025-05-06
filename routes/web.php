@@ -46,3 +46,5 @@ $router->post('/api/auth', [ApiController::class, 'auth']);
 $router->post('/api/tasks', [ApiController::class, 'tasks']);
 $router->post('/api/task-update', [ApiController::class, 'update']);
 $router->post('/api/task-delete', [ApiController::class, 'delete']);
+$router->post('/api/task-pending', [ApiController::class, 'pending']);
+$router->post('/api/task-completed', [ApiController::class, 'completed']);

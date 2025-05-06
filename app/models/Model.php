@@ -39,6 +39,15 @@ abstract class Model {
         return $stmt->fetchAll();
     }
 
+    // Método genérico para obtener un registro por su estado
+    public static function getByStatus($table, $user_id, $status) {
+        $stmt = static::$db->prepare("SELECT * FROM $table WHERE user_id = :user_id AND estado = :status");
+        $stmt->execute(['user_id' => $user_id,
+                        'status' => $status]);
+        $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, static::class);
+        return $stmt->fetchAll();
+    }
+
     // Método genérico para obtener un registro por TOKEN
     public static function getByToken($table, $token) {
         $stmt = static::$db->prepare("SELECT * FROM $table WHERE token = :token");

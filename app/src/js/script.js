@@ -16,7 +16,7 @@ async function AllTasks() {
         const body = await res.json();
 
         if (body.success == true) {
-            mostrarTasks(body.tasks);
+            renderTasks(body.tasks);
         } else {
             showMessage();
         }
@@ -26,8 +26,19 @@ async function AllTasks() {
     }
 }
 
-// Nos muestra las tareas en el html
-function mostrarTasks(tasks) {
+// Muestra un mensaje si no hay tareas para mostrar
+function showMessage() {
+    const projectsDiv = document.querySelector('.projects');
+
+    const mensaje = document.createElement('H3');
+    mensaje.textContent = 'No tienes ninguna tarea';
+    mensaje.classList.add('mensaje');
+
+    projectsDiv.appendChild(mensaje);
+}
+
+// Listar las tareas
+function renderTasks(tasks) {
     const projectsContainer = document.querySelector('.projects-container');
     projectsContainer.innerHTML = '';
 
@@ -94,6 +105,7 @@ function mostrarTasks(tasks) {
     deleteTask();
 }
 
+// Actualizar el estado de las tareas
 function actualizarEstado() {
     const btnUpdate = document.querySelectorAll('.pending');
     btnUpdate.forEach(btn => {
@@ -120,29 +132,25 @@ function actualizarEstado() {
 }
 
 async function actualizar(id) {
-    const url = '/api/task-update';
-    const res = await fetch(url, {
-        method: 'POST',
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id })
-    });
+    try {
+        const url = '/api/task-update';
+        const res = await fetch(url, {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id })
+        });
 
-    const data = await res.json();
+        const data = await res.json();
 
-    if (data.success) {
-        location.reload();
+        if (data.success) {
+            location.reload();
+        }
+    } catch(error) {
+        console.error('Error actualizando tarea: ', error);
     }
 }
 
-function showMessage() {
-    const projectsDiv = document.querySelector('.projects');
-
-    const mensaje = document.createElement('H3');
-    mensaje.textContent = 'No tienes ninguna tarea';
-    mensaje.classList.add('mensaje');
-
-    projectsDiv.appendChild(mensaje);
-}
+// Eliminar una tarea
 
 function deleteTask() {
     const btnEliminar = document.querySelectorAll('.eliminar');
@@ -152,8 +160,8 @@ function deleteTask() {
             const id = e.target.dataset.idTask;
 
             Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
+                title: "Estas seguro que quieres eliminar esta tarea?",
+                // text: "You won't be able to revert this!",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
@@ -187,7 +195,60 @@ async function eliminar(id) {
         });
 
         const body = await res.json();
+        
+        if(!body.success) {
+            console.error('No se pudo eliminar la tarea')
+        }
+
     } catch (error) {
         console.error('Error eliminando tarea: ', error);
     }
 }
+
+// Filtrar por las tareas pendientes, completadas y todas las tareas
+const inputRadio = document.querySelectorAll('.input-radio');
+const userId = document.querySelector('[data-id]')?.dataset.id;
+
+inputRadio.forEach(radio => {
+    radio.addEventListener('change', (e) => {
+        if (e.target.value === 'pendiente') {
+            pending();
+        } else if (e.target.value === 'completado') {
+            completed();
+        } else {
+            AllTasks();
+        }
+    });
+});
+
+// Pendientes
+async function pending() {
+    const url = '/api/task-pending';
+    const res = await fetch(url, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId })
+    });
+
+    const body = await res.json();
+
+    if (body.resultado) {
+        renderTasks(body.resultado);
+    }
+};
+
+// Completadas
+async function completed() {
+    const url = '/api/task-completed';
+    const res = await fetch(url, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId })
+    });
+
+    const body = await res.json();
+
+    if (body.resultado) {
+        renderTasks(body.resultado);
+    }
+};

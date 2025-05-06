@@ -35,6 +35,12 @@ class Tareas extends Model {
         return self::getByUserId($this->table, $user_id);
     }
 
+    // Metodo para obtener las tareas por su estado y id de usuario
+
+    public function getTaskByStatus($user_id, $status) {
+        return self::getByStatus($this->table, $user_id, $status);
+    }
+
     // Método para crear una tarea (hereda de Model)
     public function createTask($tarea) {
         return self::create($this->table, [

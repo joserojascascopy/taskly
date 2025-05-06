@@ -38,17 +38,17 @@
                 <span>Filtrar:</span>
 
                 <label>
-                    <input type="radio" name="filter" value="todas" checked />
+                    <input class="input-radio" type="radio" name="filter" value="todas" checked />
                     Todas
                 </label>
 
                 <label>
-                    <input type="radio" name="filter" value="pendiente" />
+                    <input class="input-radio" type="radio" name="filter" value="pendiente" />
                     Pendientes
                 </label>
 
                 <label>
-                    <input type="radio" name="filter" value="completado" />
+                    <input class="input-radio" type="radio" name="filter" value="completado" />
                     Completadas
                 </label>
             </div>

@@ -50,10 +50,19 @@ function renderTasks(tasks) {
 
         const cardHeader = document.createElement('DIV');
         cardHeader.classList.add('card-header');
-        cardHeader.classList.add(estado);
 
         const cardTitle = document.createElement('H2');
         cardTitle.textContent = titulo;
+
+        const cardContent = document.createElement('DIV');
+        cardContent.classList.add('card-content');
+
+        const descripcionParrafo = document.createElement('P');
+        descripcionParrafo.textContent = descripcion;
+
+        const cardFooter = document.createElement('DIV');
+        cardFooter.classList.add('card-footer');
+        cardFooter.classList.add(estado);
 
         const divAcciones = document.createElement('DIV');
         divAcciones.classList.add('acciones-container');
@@ -76,7 +85,7 @@ function renderTasks(tasks) {
 
             const span = document.createElement('SPAN');
             span.classList.add('tooltiptext');
-            span.textContent = 'Haz doble click para marcar como completado';
+            span.textContent = 'Haz click para completar la tarea';
 
             divEstado.appendChild(btnEstado);
             divEstado.appendChild(span);
@@ -88,15 +97,13 @@ function renderTasks(tasks) {
         btnEliminar.textContent = 'ELIMINAR';
 
         projectCard.appendChild(cardHeader);
+        projectCard.appendChild(cardContent);
+        projectCard.appendChild(cardFooter);
         cardHeader.appendChild(cardTitle);
-        cardHeader.appendChild(divAcciones);
+        cardContent.appendChild(descripcionParrafo);
+        cardFooter.appendChild(divAcciones);
         divAcciones.appendChild(divEstado);
         divAcciones.appendChild(btnEliminar);
-
-        const descripcionParrafo = document.createElement('P');
-        descripcionParrafo.textContent = descripcion;
-
-        projectCard.appendChild(descripcionParrafo);
 
         projectsContainer.appendChild(projectCard);
     });
@@ -109,25 +116,38 @@ function renderTasks(tasks) {
 function actualizarEstado() {
     const btnUpdate = document.querySelectorAll('.pending');
     btnUpdate.forEach(btn => {
-        // Para versión móvil
-        let touchCount = 0;
-
-        btn.addEventListener('touchstart', (e) => {
-            touchCount++;
-            setTimeout(() => { touchCount = 0; }, 500); // Resetea después de 500ms
-
-            if (touchCount === 2) {
-                const id = e.target.dataset.idTask;
-                actualizar(id);
-            }
-        });
-
         // El dblclick funciona en escritorio, se mantiene
-        btn.addEventListener('dblclick', (e) => {
+        // btn.addEventListener('dblclick', (e) => {
+        //     const id = e.target.dataset.idTask;
+
+        //     actualizar(id);
+        // });
+
+        btn.addEventListener('click', (e) => {
             const id = e.target.dataset.idTask;
 
-            actualizar(id);
-        });
+            Swal.fire({
+                title: "Quieres completar la tarea?",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Si, completar!",
+                cancelButtonText: "No"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    actualizar(id).then(() => {
+                        Swal.fire({
+                            title: "Completado",
+                            text: "La tarea ha sido marcada como completado",
+                            icon: "success"
+                        }).then(() => {
+                            location.reload();
+                        })
+                    });
+                }
+            });
+        })
     });
 }
 
@@ -145,7 +165,7 @@ async function actualizar(id) {
         if (data.success) {
             location.reload();
         }
-    } catch(error) {
+    } catch (error) {
         console.error('Error actualizando tarea: ', error);
     }
 }
@@ -195,8 +215,8 @@ async function eliminar(id) {
         });
 
         const body = await res.json();
-        
-        if(!body.success) {
+
+        if (!body.success) {
             console.error('No se pudo eliminar la tarea')
         }
 

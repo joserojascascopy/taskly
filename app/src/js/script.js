@@ -35,6 +35,17 @@ function showMessage() {
     mensaje.classList.add('mensaje');
 
     projectsDiv.appendChild(mensaje);
+
+    // Desabhilitamos los input de pendiente y completadas
+
+    const inputRadio = document.querySelectorAll('.input-radio');
+    inputRadio.forEach(input => {
+        if(input.value === 'completado') {
+            input.disabled = true;
+        }else if(input.value === 'pendiente') {
+            input.disabled = true;
+        }
+    })
 }
 
 // Listar las tareas

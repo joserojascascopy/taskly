@@ -3,7 +3,7 @@
         <div class="nav-container">
             <img class="logo" src="/assets/img/taskly-logo.png" alt="Logo Taskly">
             <nav class="nav-links">
-                <a href="#">Perfil</a>
+                <a href="/perfil">Perfil</a>
                 <a href="/dashboard">Tareas</a>
                 <a href="/crear-tarea">Crear Tarea</a>
             </nav>

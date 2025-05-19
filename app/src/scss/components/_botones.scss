@@ -57,3 +57,16 @@
         background-color: v.$grisOscuro;
     }
 }
+
+.btn-actualizar {
+    background-color: v.$negro;
+    color: v.$blanco;
+    font-weight: 500;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.4s ease;
+
+    &:hover {
+        background-color: v.$grisOscuro;
+    }
+}

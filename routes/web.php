@@ -41,6 +41,7 @@ $router->get('/dashboard', [DashboardController::class, 'index']);
 $router->get('/crear-tarea', [DashboardController::class, 'create']);
 $router->post('/crear-tarea', [DashboardController::class, 'create']);
 $router->get('/perfil', [PerfilController::class, 'index']);
+$router->post('/perfil', [PerfilController::class, 'index']);
 
 // API
 

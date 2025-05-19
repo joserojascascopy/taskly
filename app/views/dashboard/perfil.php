@@ -28,25 +28,26 @@
                     </rect>
                 </svg>
             </button>
-            <p>Hola: <span>José Rojas</span></p>
+            <p>Hola: <span><?php echo $nombre . " " . $apellido; ?></span></p>
             <a class="logout-btn" href="/logout">Cerrar sesión</a>
         </header>
 
-        <section class="crear-tarea">
+        <section class="perfil">
             <h2>Mi perfil</h2>
             <?php include_once __DIR__ . '/../components/alertas.php'; ?>
-            <form class="tarea-form" method="POST">
+            <form class="perfil-form" method="POST">
                 <div class="form-group">
-                    <label for="titulo">Título de la tarea</label>
-                    <input type="text" id="titulo" name="titulo" placeholder="Ej: Diseñar landing page" />
+                    <label for="nombre">Nombre y Apellido</label>
+                    <input type="text" id="nombre" name="nombre" value="<?php echo $nombre . " " . $apellido; ?>" />
                 </div>
 
                 <div class="form-group">
-                    <label for="descripcion">Descripción</label>
-                    <textarea id="descripcion" name="descripcion" placeholder="Breve descripción de la tarea..." rows="4"></textarea>
+                    <label for="email">Correo Electronico</label>
+                    <input type="text" id="email" name="email" value="<?php echo $email; ?>" />
                 </div>
-                <input type="hidden" id="user_id" name="user_id" value="<?php echo $user_id; ?>">
-                <input type="submit" class="btn-crear" value="Crear Tarea">
+
+                <input type="submit" class="btn-actualizar" value="Actualizar Perfil">
+
             </form>
         </section>
 

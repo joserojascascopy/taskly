@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use Models\Tareas;
+use Models\User;
 use MVC\Router;
 
 class DashboardController {
@@ -10,11 +11,15 @@ class DashboardController {
         session_start();
 
         $user_id = $_SESSION['id'];
-        $nombre = $_SESSION['nombre'];
+
+        $user = new User;
+
+        $user = $user->getUserById($user_id);
 
         $router->render('dashboard/index', [
             'user_id' => $user_id,
-            'nombre' => $nombre
+            'nombre' => $user->nombre,
+            'apellido' => $user->apellido
         ]);
     }
 
@@ -22,6 +27,10 @@ class DashboardController {
         session_start();
 
         $user_id = $_SESSION['id'];
+
+        $user = new User;
+
+        $user = $user->getUserById($user_id);
     
         $task = new Tareas;
 
@@ -43,7 +52,9 @@ class DashboardController {
 
         $router->render('dashboard/crear-tarea', [
             'alertas' => $alertas,
-            'user_id' => $user_id
+            'user_id' => $user_id,
+            'nombre' => $user->nombre,
+            'apellido' => $user->apellido
         ]);
     }
 }

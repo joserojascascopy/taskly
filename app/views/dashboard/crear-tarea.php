@@ -27,7 +27,7 @@
                     </rect>
                 </svg>
             </button>
-            <p>Hola: <span>José Rojas</span></p>
+            <p>Hola: <span><?php echo $nombre . " " . $apellido; ?></span></p>
             <a class="logout-btn" href="/logout">Cerrar sesión</a>
         </header>
         <section class="crear-tarea">

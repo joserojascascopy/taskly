@@ -20,6 +20,7 @@ abstract class Model {
     public static function getById($table, $id) {
         $stmt = static::$db->prepare("SELECT * FROM $table WHERE id = :id");
         $stmt->execute(['id' => $id]);
+        $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, static::class);
         return $stmt->fetch();
     }
 

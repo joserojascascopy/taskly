@@ -61,11 +61,11 @@ class User extends Model {
     }
 
     // Método para actualizar un usuario
-    public function updateUser($id, $name, $email, $password) {
+    public function updateUser($id, $nombre, $apellido, $email) {
         return self::update($this->table, $id, [
-            'name' => $name,
-            'email' => $email,
-            'password' => password_hash($password, PASSWORD_DEFAULT)
+            'nombre' => $nombre,
+            'apellido' => $apellido,
+            'email' => $email
         ]);
     }
 

@@ -23,16 +23,15 @@ class PerfilController {
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-            if ($_POST['nombre'] === '' || $_POST['email'] === '') {
+            if ($_POST['nombre'] === '') {
                 $alertas['error'] = 'Los campos no pueden estar vacios';
             }else {
                 $partes = explode(' ', $_POST['nombre']);
                 $nombre = $partes[0];
                 $apellido = $partes[1];
-                $email = $_POST['email'];
 
-                if($nombre !== $user->nombre || $apellido !== $user->apellido || $email !== $user->email) {
-                    $resultado = $user->updateUser($user_id, $nombre, $apellido, $email);
+                if($nombre !== $user->nombre || $apellido !== $user->apellido) {
+                    $resultado = $user->updateUser($user_id, $nombre, $apellido);
 
                     if ($resultado) {
                         header('Location: /perfil?update=1');

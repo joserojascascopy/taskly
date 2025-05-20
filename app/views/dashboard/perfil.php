@@ -43,7 +43,7 @@
 
                 <div class="form-group">
                     <label for="email">Correo Electronico</label>
-                    <input type="text" id="email" name="email" value="<?php echo $email; ?>" />
+                    <input type="text" id="email" value="<?php echo $email; ?>"  disabled />
                 </div>
 
                 <input type="submit" class="btn-actualizar" value="Actualizar Perfil">
